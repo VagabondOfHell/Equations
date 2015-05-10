@@ -10,17 +10,21 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	Equation eq = Equation();
 
-	eq.SetEquation("y = -(z + -b)");
-	eq.SetEquation("t= -g +(-yb + -m)");
+	eq.SetEquation("'Vf' = 'Vi't + 0.5at^2");
 
-	eq.SetVariable("y", 5);
-	eq.SetVariable("g", 9);
+	//eq.SetEquation("g = -((16 ^ (1/4) * 6) / 2) * -0.5");
+	eq.SetVariable("Vi", 15.0);
+	eq.SetVariable("t", 0.0016);
+	eq.SetVariable("a", 4.0);
 
-	eq.SetVariable("m", 3);
-	eq.SetVariable("x", 7);
-	eq.SetVariable("b", 4);
-
-	std::cout << eq.GetAnswer("t") << std::endl;
+	try
+	{
+		std::cout << eq.GetAnswer("Vf") << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
 	getchar();
 

@@ -9,7 +9,7 @@
 class EquationParser
 {
 private:
-	static const std::array<const std::string, 2> WORD_OPERATORS;
+	static const std::array<const std::string, 3> WORD_OPERATORS;
 
 	static bool EvaluatePhrase(std::string& equation, const std::string& phrase);
 
@@ -19,10 +19,12 @@ private:
 
 	static bool GetBetweenSymbol(std::string& baseString, const char symbol, std::string& outVal);
 
+	static bool GetNumberString(std::string& baseString, std::string& outVal);
+
 public:
 	typedef std::map<std::string, Variable> VariableMap;
 
-	static bool ExtractVariables(const std::vector<std::string>& brokenDownEquation, VariableMap& mapToFill);
+	static bool ExtractVariables(std::vector<std::string>& brokenDownEquation, VariableMap& mapToFill);
 
 	static bool ValidateEquation(const std::string& equation, bool& hasBrackets);
 

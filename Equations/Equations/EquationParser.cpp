@@ -1,7 +1,7 @@
 #include "EquationParser.h"
 #include "StringExtensions.h"
 
-const std::array<const std::string, 2> EquationParser::WORD_OPERATORS = {"sqrt", "pow"};
+const std::array<const std::string, 3> EquationParser::WORD_OPERATORS = {"sqrt", "pow", "^"};
 
 bool EquationParser::ValidateEquation(const std::string& equation, bool& hasBrackets)
 {
@@ -97,6 +97,15 @@ std::vector<std::string> EquationParser::ExtractEquationParts(const std::string&
 				copyVal.erase(0, 1);
 			}
 		}
+		else if(StringExtensions::IsNumber(copyVal[0]))
+		{
+			std::string numVal;
+
+			if(GetNumberString(copyVal, numVal))
+			{
+				retVal.push_back(numVal);
+			}
+		}
 	}
 
 	return retVal;
@@ -106,7 +115,8 @@ bool EquationParser::InsertMultiplicationSymbol(const std::string& prevInsert)
 {
 	//Check to see if we should insert a multiplication symbol before this variable
 	//i.e. y = mx + b will be treated y = m*x+b.    5(x-b) will be 5 * (x-b)
-	if(!StringExtensions::IsAllAlphanumeric(prevInsert) &&	prevInsert != ")")
+	if((!StringExtensions::IsAllAlphanumeric(prevInsert) && !StringExtensions::IsAllNumbers(prevInsert, true))
+		&&	prevInsert != ")")
 		return false;
 
 	if(IsWordOperator(prevInsert))
@@ -137,9 +147,11 @@ std::vector<std::string>::const_iterator
 		WORD_OPERATORS.begin(), WORD_OPERATORS.end());
 }
 
-bool EquationParser::ExtractVariables(const std::vector<std::string>& brokenDownEquation, VariableMap& mapToFill)
+bool EquationParser::ExtractVariables(std::vector<std::string>& brokenDownEquation, VariableMap& mapToFill)
 {
 	Variable* lastVariableCreated = NULL;
+
+	unsigned int constantsIndex = 0;
 
 	for (unsigned int i = 0; i < brokenDownEquation.size(); i++)
 	{
@@ -150,8 +162,25 @@ bool EquationParser::ExtractVariables(const std::vector<std::string>& brokenDown
 		}
 		else if(StringExtensions::IsAllAlphanumeric(brokenDownEquation[i]) && !IsWordOperator(brokenDownEquation[i]))
 		{
+			if(!StringExtensions::IsAllNumbers(brokenDownEquation[i], true))
+				lastVariableCreated = &mapToFill.insert
+					(VariableMap::value_type(brokenDownEquation[i], Variable(brokenDownEquation[i]))).first->second;
+			else
+			{
+				std::string constName = "con" + std::to_string(constantsIndex);
+				lastVariableCreated = &mapToFill.insert
+					(VariableMap::value_type(constName, Variable(std::stod(brokenDownEquation[i]), constName))).first->second;
+				brokenDownEquation[i] = constName;
+				constantsIndex++;
+			}
+		}
+		else if(StringExtensions::IsAllNumbers(brokenDownEquation[i], true))
+		{
+			std::string constName = "con" + std::to_string(constantsIndex);
 			lastVariableCreated = &mapToFill.insert
-				(VariableMap::value_type(brokenDownEquation[i], Variable(brokenDownEquation[i]))).first->second;
+				(VariableMap::value_type(constName, Variable(std::stod(brokenDownEquation[i]), constName))).first->second;
+			brokenDownEquation[i] = constName;
+			constantsIndex++;
 		}
 	}
 
@@ -213,4 +242,27 @@ bool EquationParser::GetBetweenSymbol(std::string& baseString, const char symbol
 	section = StringExtensions::RemoveAllOfSymbol(section, symbol);
 	outVal = section;
 	return true;
+}
+
+bool EquationParser::GetNumberString(std::string& baseString, std::string& outVal)
+{
+	bool decimalFound = false;
+
+	unsigned int i = 0;
+
+	for (i; i < baseString.size(); i++)
+	{
+		if(!StringExtensions::IsNumber(baseString[i]) && !(baseString[i] == '.' && !decimalFound))
+			break;
+	}
+
+	if(i != 0)
+	{
+		outVal = baseString.substr(0, i);
+		baseString.erase(0, i);
+
+		return true;
+	}
+
+	return false;
 }

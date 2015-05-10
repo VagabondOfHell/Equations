@@ -36,6 +36,15 @@
     <ClInclude Include="EquationParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EquationSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EquationSharedData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EquationRearranger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -51,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EquationParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EquationSolver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EquationRearranger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

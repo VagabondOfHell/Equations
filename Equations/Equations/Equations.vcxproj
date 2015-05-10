@@ -81,6 +81,9 @@
   <ItemGroup>
     <ClInclude Include="Equation.h" />
     <ClInclude Include="EquationParser.h" />
+    <ClInclude Include="EquationRearranger.h" />
+    <ClInclude Include="EquationSharedData.h" />
+    <ClInclude Include="EquationSolver.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringExtensions.h" />
     <ClInclude Include="targetver.h" />
@@ -89,7 +92,9 @@
   <ItemGroup>
     <ClCompile Include="Equation.cpp" />
     <ClCompile Include="EquationParser.cpp" />
+    <ClCompile Include="EquationRearranger.cpp" />
     <ClCompile Include="Equations.cpp" />
+    <ClCompile Include="EquationSolver.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="StringExtensions.cpp" />
   </ItemGroup>
