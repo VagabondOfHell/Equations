@@ -1,9 +1,9 @@
 #include "EquationParser.h"
 #include "StringExtensions.h"
 
-const std::array<const std::string, 3> EquationParser::WORD_OPERATORS = {"sqrt", "pow", "^"};
+using namespace EquationSharedData;
 
-bool EquationParser::ValidateEquation(const std::string& equation, bool& hasBrackets)
+bool EquationParser::ValidateEquation(const std::string& equation)
 {
 	int numBrackets = 0;
 	int numSingleQuotes = 0;
@@ -37,15 +37,8 @@ bool EquationParser::ValidateEquation(const std::string& equation, bool& hasBrac
 		}
 	}
 
-	if(numBrackets != 0 || numEqualSigns > 1 || numSingleQuotes % 2 != 0 || numDoubleQuotes % 2 != 0)
-	{
-		return false;
-	}
-	else
-	{
-		hasBrackets = setHasBrackets;
-		return true;
-	}
+	//Check if brackets are opened and closed, there is only one equal sign, and each type of quote is opened and closed
+	return (numBrackets == 0 && numEqualSigns == 1 && numSingleQuotes % 2 == 0 && numDoubleQuotes % 2 == 0);
 }
 
 std::vector<std::string> EquationParser::ExtractEquationParts(const std::string& equation)
@@ -102,9 +95,7 @@ std::vector<std::string> EquationParser::ExtractEquationParts(const std::string&
 			std::string numVal;
 
 			if(GetNumberString(copyVal, numVal))
-			{
 				retVal.push_back(numVal);
-			}
 		}
 	}
 

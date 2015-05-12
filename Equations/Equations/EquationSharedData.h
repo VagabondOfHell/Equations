@@ -10,9 +10,9 @@ namespace EquationSharedData
 	typedef std::vector<std::string> StringVector;
 	typedef std::map<std::string, Variable> VariableMap;
 
-	static std::array<std::string, 3> PRIORITY_3_OPERATORS = {"*", "%", "/"};//multiplication, modulo, and division
-	static std::array<std::string, 2> PRIORITY_4_OPERATORS = {"+", "-"};//addition and subtraction
-
+	const static std::array<std::string, 3> PRIORITY_3_OPERATORS = {"*", "%", "/"};//multiplication, modulo, and division
+	const static std::array<std::string, 2> PRIORITY_4_OPERATORS = {"+", "-"};//addition and subtraction
+	const static std::array<const std::string, 3> WORD_OPERATORS = {"sqrt", "pow", "^"};
 
 	struct OperatorVariables
 	{

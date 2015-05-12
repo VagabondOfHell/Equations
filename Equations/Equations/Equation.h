@@ -10,28 +10,32 @@ class Equation
 private:
 	typedef std::map<std::string, Variable> VariableMap;
 	typedef std::vector<std::string> StringVector;
-
-	bool hasBrackets;
 	
 	///<summary>Checks to see if the passed equation is formed correctly</summary>
 	///<param name="equation">The string representing the equation</param>
 	///<returns>True if valid, false if not</returns>
 	bool ValidateEquation(const std::string& equation)const;
 
-protected:
+	///<summary>Takes the base equation and removes all double quotes to show it in its normal form</summary>
+	void FormatEquation();
 
-	StringVector IsolateVariable(const std::string& variable)const;
+protected:
+	friend class EquationRearranger;
 
 	StringVector brokenDownEquation;
 	VariableMap variables;
 
 	std::string baseEquation;
+	std::string formattedEquation;
 
 public:
 	Equation(void);
 	virtual ~Equation(void);
 
 	bool SetEquation(const std::string& equation);
+
+	inline std::string GetEquation()const{return baseEquation;}
+	inline std::string GetFormattedEquation()const {return formattedEquation;}
 
 	bool SetVariable(const std::string& varAlias, double varVal);
 

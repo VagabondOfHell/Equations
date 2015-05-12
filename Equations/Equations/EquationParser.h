@@ -1,15 +1,9 @@
 #pragma once
-#include <string>
-#include <array>
-#include <vector>
-#include <map>
-
-#include "Variable.h"
+#include "EquationSharedData.h"
 
 class EquationParser
 {
 private:
-	static const std::array<const std::string, 3> WORD_OPERATORS;
 
 	static bool EvaluatePhrase(std::string& equation, const std::string& phrase);
 
@@ -22,11 +16,9 @@ private:
 	static bool GetNumberString(std::string& baseString, std::string& outVal);
 
 public:
-	typedef std::map<std::string, Variable> VariableMap;
+	static bool ExtractVariables(std::vector<std::string>& brokenDownEquation, EquationSharedData::VariableMap& mapToFill);
 
-	static bool ExtractVariables(std::vector<std::string>& brokenDownEquation, VariableMap& mapToFill);
-
-	static bool ValidateEquation(const std::string& equation, bool& hasBrackets);
+	static bool ValidateEquation(const std::string& equation);
 
 	static std::vector<std::string> ExtractEquationParts(const std::string& equation);
 
