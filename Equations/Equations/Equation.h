@@ -22,11 +22,11 @@ private:
 protected:
 	friend class EquationRearranger;
 
-	StringVector brokenDownEquation;
-	VariableMap variables;
+	StringVector brokenDownEquation;//Vector of the equation separated into it's individual parts
+	VariableMap variables;//Map of the variables indexed by alias
 
-	std::string baseEquation;
-	std::string formattedEquation;
+	std::string baseEquation;//The raw equation
+	std::string formattedEquation;//The equation with all double quotes removed (and any other things needed to be removed in the future)
 
 public:
 	Equation(void);
