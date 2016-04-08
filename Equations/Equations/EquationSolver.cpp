@@ -34,10 +34,12 @@ double EquationSolver::Solve()
 	Variable total;
 	bool applyNegative = false;
 
+	//If the size of our equation is now 1, we have our answer and we just need to get the variable value
 	if(workingEquation.size() == 1)
 		GetVariable(workingEquation[0], total);
-	else if(workingEquation.size() == 2)
+	else if(workingEquation.size() == 2) 
 	{
+		//If the size is 2, check for a negative sign, otherwise we have an issue
 		GetVariable(workingEquation[1], total);
 
 		if(workingEquation[0] == "-")
@@ -45,9 +47,10 @@ double EquationSolver::Solve()
 		else
 			throw std::exception("Answer Too Long");
 	}
-	else
+	else//If we reach this point after processing the equation, we don't know how else to proceed
 		throw std::exception("Unsolvable");
 
+	//Apply the negative sign if necessary
 	if(applyNegative)
 		return -total.GetValue();
 	else
@@ -119,7 +122,7 @@ StringVector EquationSolver::ProcessEquation(StringVector& portion)
 				continue;
 			}
 		}
-
+		
 		ProcessOperator(portion, arithOp);
 
 		//reset search criteria
