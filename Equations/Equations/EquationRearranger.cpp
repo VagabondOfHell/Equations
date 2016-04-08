@@ -1,6 +1,9 @@
 #include "EquationRearranger.h"
 #include "Equation.h"
 
+///WORK IN PROGRESS... The goal of this class is to take any equation and rearrange it before solving in order
+//to solve for any variable... this is the goal of V2
+
 EquationRearranger::EquationRearranger(const Equation& _equation)
 		:equation(_equation)
 {
