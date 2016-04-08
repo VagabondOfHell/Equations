@@ -1,40 +1,32 @@
+This application takes a string representing an equation and can then solve it for you with values you provide
+to the variables.
+
+In Version 2 (in progress), this will also rearrange the equation to solve for any variable in the provided equation.
+
+
+
 ========================================================================
     CONSOLE APPLICATION : Equations Project Overview
 ========================================================================
 
-AppWizard has created this Equations application for you.
-
-This file contains a summary of what you will find in each of the files that
-make up your Equations application.
-
-
-Equations.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
-
-Equations.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
-
 Equations.cpp
     This is the main application source file.
 
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
+Equation
+    Class holding information about the equation
 
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named Equations.pch and a precompiled types file named StdAfx.obj.
+EquationsSolver
+    Handles parsing the strings into evaluable portions to provide a final answer calculated from provided values.
+    
+EquationParser
+    Parses the equation string into portions that can later be used to assign values or solve the equation with
+    
+EquationRearranger
+    Not yet implemented. Will rearrange to isolate a specified variable
 
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
+EquationSharedData
+    Information shared among the above 4 classes
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
+StringExtensions
+    Helper functions for specific string manipulations
 /////////////////////////////////////////////////////////////////////////////
