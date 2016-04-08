@@ -7,14 +7,16 @@
 
 namespace EquationSharedData
 {
+	//Code shared between the Equation, Solver, Parser, and Rearranger classes
 	typedef std::vector<std::string> StringVector;
 	typedef std::map<std::string, Variable> VariableMap;
-
+	
+	//Priorities of operators, with Brackets and Exponents taking Priority 1 and 2
 	const static std::array<std::string, 3> PRIORITY_3_OPERATORS = {"*", "%", "/"};//multiplication, modulo, and division
 	const static std::array<std::string, 2> PRIORITY_4_OPERATORS = {"+", "-"};//addition and subtraction
-	const static std::array<const std::string, 3> WORD_OPERATORS = {"sqrt", "pow", "^"};
+	const static std::array<const std::string, 3> WORD_OPERATORS = {"sqrt", "pow", "^"}; //Add trig functions and log in V2
 
-	struct OperatorVariables
+	struct OperatorVariables //For the Equation Solver primarily in the processing of operators from String to their functional equivalent
 	{
 		std::vector<std::string>::const_iterator lhValIter;
 		std::vector<std::string>::const_iterator rhValIter;
